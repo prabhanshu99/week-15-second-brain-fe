@@ -1,3 +1,4 @@
+
 type variant= "primary"|"secondary";
 
 export interface Buttonprops{
@@ -6,7 +7,8 @@ export interface Buttonprops{
     text:String,
     startIcon?:any,
     endIcon?:any,
-    onClick:() => void;
+    onClick?:() => void;
+    fullWidth?:boolean;
 }
 
 const VariantStyles = {
@@ -14,7 +16,7 @@ const VariantStyles = {
     "secondary":"bg-indigo-200 text-indigo-600"
 }
 
-const defaultStyles="rounded-md flex"
+const defaultStyles="rounded-md flex cursor-pointer"
 
 const sizeStyles={
     "sm":"py-1 px-2",
@@ -22,8 +24,7 @@ const sizeStyles={
     "lg":"py-4 px-6"
 }
 
-export const Button= (props: Buttonprops) => {
-    return <button className={`${VariantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size]} "flex items-center"`} >{props.startIcon} {props.text}</button>
+export const Button= ({variant,size,text,startIcon,onClick,fullWidth}: Buttonprops) => {
+    return <button onClick={onClick} className={`${VariantStyles[variant]} ${defaultStyles} ${fullWidth?" w-full flex justify-center items-center":""} ${sizeStyles[size]} "flex items-center py-2 "`} >{startIcon} {text}</button>
 }
 
-<Button variant="primary" size="lg" onClick={() => {}} text="Add Content"/>
